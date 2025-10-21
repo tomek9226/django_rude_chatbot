@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rude Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        #chat-container {
+            width: 400px;
+            background: #222;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        #messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding-right: 10px;
+        }
+
+        .msg {
+            padding: 6px 10px;
+            margin: 6px 0;
+            border-radius: 6px;
+            width: fit-content;
+            max-width: 80%;
+        }
+
+        .user {
+            background: #4dabff;
+            margin-left: auto;
+        }
+
+        .bot {
+            background: #ff6961;
+            margin-right: auto;
+        }
+
+        #input-box {
+            display: flex;
+        }
+
+        #message {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px;
+            margin-left: 5px;
+            border: none;
+            background: #4dabff;
+            color: #000;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <div id="input-box">
+            <input id="message" type="text" placeholder="Say something...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById("message");
+            const text = input.value.trim();
+            if (!text) return;
+
+            addMessage("You: " + text, "user");
+            input.value = "";
+
+            const response = await fetch("/api/chat/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: text })
+            });
+            const data = await response.json();
+
+            addMessage("Bro: " + data.reply, "bot");
+        }
+
+        function addMessage(text, cls) {
+            const messages = document.getElementById("messages");
+            const div = document.createElement("div");
+            div.className = "msg " + cls;
+            div.innerText = text;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        document.getElementById("message").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+
+</html>
