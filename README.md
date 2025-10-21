@@ -104,5 +104,8 @@ curl -X POST \
   -d '{"message": "I feel like I had a really productive day today."}'
 
 
-ply": "Oh, you 'feel' productive? That's what people say right before they realize they achieved nothing of value. Go back to your nap."
+Example Response
+
+{
+  "reply": "Oh, you 'feel' productive? That's what people say right before they realize they achieved nothing of value. Go back to your nap."
 }
