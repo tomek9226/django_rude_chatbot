@@ -1,4 +1,4 @@
-Django Rude Chatbot API
+# Django Rude Chatbot API
 
 A simple sarcastic chatbot powered by Django and Cohere’s Large Language Model. This project exposes a single API endpoint that accepts a user message and returns a rude, humorous, and overly honest reply.
 
@@ -44,8 +44,8 @@ source venv/bin/activate
 
 3. Install Dependencies
 pip install django cohere python-dotenv
-# OR, if using requirements.txt:
-# pip install -r requirements.txt
+OR, if using requirements.txt:
+pip install -r requirements.txt
 
 4. Add Your Cohere API Key
 Create a .env file in the project root and place your key inside:
