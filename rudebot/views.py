@@ -25,7 +25,7 @@ def call_cohere_chat_api(message):
     try:
         response = co.chat(
             model="command-a-03-2025",
-            message=f"Reply to this in a rude and sarcastic way shortly: {message}",
+            message=f"Reply to this in a rude and sarcastic way shortly and don't use same opening, like 'Oh wow' etc: {message}",
         )
         return response.text
     except Exception as e:
